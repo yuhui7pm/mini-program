@@ -1,0 +1,19 @@
+var format = function(text){
+  //第一个数为为空，第二个数据才是正常的数据
+  if(!text){
+    return;
+  }
+
+  //生成正则表达式对象
+  var reg = getRegExp('\\\\n','g');
+  return text.replace(reg,'\n&nbsp;&nbsp;&nbsp;&nbsp;');
+}
+
+var limit = function(arr,length){
+  return arr.slice(0,length);
+}
+
+module.exports = {
+  limit:limit,
+  format:format
+}

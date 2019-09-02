@@ -1,0 +1,39 @@
+<!--pages/my/my.wxml-->
+<view  class="container">
+  <image src="/images/my/my@bg.png" class="bg"></image>
+  <!-- 点击头像获取授权信息 -->
+  <v-button wx:if="{{!authorized}}" open-type="getUserInfo" class="avatar-position" bind:getuserinfo="onGetUserInfo">
+      <image slot="img" class="avatar" src="/images/my/my.png" />
+  </v-button>
+  <!-- 将授权信息呈现在页面上 -->
+  <view wx:if="{{authorized}}" class='avatar-container avatar-position'>
+    <image src='{{userInfo.avatarUrl}}' class='avatar'></image>
+    <text>{{userInfo.nickName}}</text>
+  </view>
+
+  <view class="about-container">
+    <!-- 关于我们 -->
+    <view bind:tap="onJumpToAbout" class="about-us">
+        <image src="/images/my/about.png" />
+        <text class="description">关于我们</text>
+    </view>
+    <!-- 喜欢的书(总数) -->
+    <view class="about-us">
+        <text class="book-num">{{bookCount}}</text>
+        <text class="description">喜欢的书</text>
+    </view>
+  </view>
+
+  <!-- 显示出喜欢的书籍 -->
+  <view class="like-container">
+    <image class="headline" src="/images/my/like.png" />
+    <view class="preview-container">
+        <block wx:for="{{classic}}" wx:key="">
+            <v-preview bind:tapping="onJumpToDetail" class="preview" classic="{{item}}" />
+        </block>
+    </view>
+  </view>
+</view>
+
+<!-- 关于学习 -->
+<image bind:tap="onStudy" class="study" src="/images/my/study.png"></image>

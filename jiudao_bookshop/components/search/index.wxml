@@ -1,0 +1,55 @@
+<!--components/search/index.wxml-->
+<view class="container">
+  <!-- 头部搜索框部分 -->
+  <view class="header">
+    <view class="search-container">
+       <image class="icon" src="images/search.png" />
+       <!-- bind:confirm 是点击小键盘上的搜索按钮就触发要执行的方法 -->
+       <input placeholder="书籍名" placeholder-class="in-bar" class="bar" auto-focus="true"
+        bind:confirm="onConfirm" value="{{q}}"/>
+       <image bind:tap="onDelete" class="cancel-img" src="images/cancel.png"/>
+    </view>
+    <view class="cancel" bindtap="onCancel">取消</view>
+  </view>
+
+  <view wx:if="{{!searching}}">
+    <!-- 历史记录 -->
+    <view class="history">
+      <view class="title">
+        <view class="chunk"></view>
+        <text>历史搜索</text>
+      </view>
+      <view class="tags">
+        <block wx:for="{{historyWords}}" wx:key="{{index}}">
+          <v-tag bind:tapping="onConfirm" text="{{item}}" />
+        </block>
+      </view>
+    </view>
+    <!-- 热门搜索 -->
+    <view class="history hot-search">
+      <view class="title">
+        <view class="chunk"></view>
+        <text>热门搜索</text>
+      </view>
+      <view class="tags">
+        <block wx:for="{{hotWords}}" wx:key="{{index}}">
+          <v-tag bind:tapping="onConfirm" text="{{item}}" />
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 展示书籍搜索结果 -->
+  <view class="books-container" wx:if="{{searching}}">
+    <block wx:for="{{dataArray}}" wx:key="{{item.id}}">
+      <v-book show-like="{{false}}" book="{{item}}" class="book"/>
+    </block>
+  </view>
+
+  <!-- 搜索书籍时的loading -->
+  <v-loading wx:if="{{loadingCenter}}" class='loading-center'/>
+  <!-- 书籍列表下拉时的loading动画 -->
+  <v-loading wx:if="{{loading}}" class='loading'/>
+  <!-- 没有搜索到书籍时 -->
+  <text wx:if="{{noneResult}}" class="empty-tip">没有搜索到书籍</text>
+</view>
