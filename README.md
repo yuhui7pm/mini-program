@@ -9,9 +9,5 @@
 书单板块:wx.navigateTo,class, showLoading, hideLoading, Promise.all, wxs,externalClasses,wx.showToast, includes,bind:confirm,lifecycle-function.<br>
 喜欢板块:properties,wx.getSettingwx.getuserinfo,navigator
 
-上传时间: 2019/09/02
-上传者: 余晖
-
-
 
 
